@@ -6,7 +6,7 @@ import os, time, random
 def write(q):
     print('Process to write: %s' % os.getpid())
     for value in ['A','B','C']:
-        print('Put %s to queue...' % value)
+        print('Put %s into queue...' % value)
         q.put(value)
         time.sleep(random.random())
 
