@@ -1,0 +1,11 @@
+# Global Interpreter Lock
+- only allow one thread to run in python
+- 
+
+# Thread notice
+- When creating a thread, if the subclass overrides the constructor, it must make sure to invoke base class constructor
+(`Thread.__init__()`)before doing any change.
+- `start()`: Start the thread's activity, and it arranges for the object's `run()` method to start.
+- `run()`: Method representing the thread activity.
+- If not using `join()`, then the main thread will terminate once its work is done, without
+waiting for the child threads.
