@@ -24,6 +24,7 @@ class Sayhi(Thread):
         super().__init__()
         self.name = name
 
+    # Must redefine run() method to override the original run() method
     def run(self):
         time.sleep(2)
         print("%s says hello" %self.name)

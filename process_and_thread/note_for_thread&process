@@ -1,0 +1,36 @@
+# Global Interpreter Lock
+- Only allow one thread to run in python
+- Lock the parameter that needs to be locked
+
+# 线程常用属性
+- threading.currentThread：返回当前线程变量
+- threading.enumerate:返回一个包含正在运行的线程的list，正在运行的线程指的是线程启动后，结束前的状态
+- threading.activeCount: 返回正在运行的线程数量，效果跟 len(threading.enumerate)相同
+- thread.setName: 给线程设置名字
+- thread.getName: 得到线程的名字
+
+# Consumer and customer
+- Using `Queue` as a special list, `FIRST IN FIRST OUT`
+
+# Semaphore Objects
+- A semaphore manages an internal counter which is decremented by each `acquire()` call 
+and incremented by each `release()` call. The counter can never go below zero; 
+when `acquire()` finds that it is zero, it blocks, waiting until some other thread calls `release()`
+
+# threading.Timer()
+
+# RLock Objects
+- A synchronization primitive that may be acquired multiple times by the same thread
+- Note that `RLock` is actually a factory function which returns an instance of the most efficient version of the concrete
+ `RLock` class that is supported by the platform.
+
+
+# Thread notice
+- When creating a thread, if the subclass overrides the constructor, it must make sure to invoke base class constructor
+(`Thread.__init__()`)before doing any change.
+- `start()`: Start the thread's activity, and it arranges for the object's `run()` method to start.
+- `run()`: Method representing the thread activity.
+- If not using `join()`, then the main thread will terminate once its work is done, without
+waiting for the child threads.
+- `Deamon`: Must set before the `start()`, otherwise there will be a `RuntimeError`
+- `Queue` is safe to threading

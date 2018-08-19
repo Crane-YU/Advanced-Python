@@ -21,14 +21,14 @@ def run_thread(n):
     finally:
         # release lock
         lock.release()
-    try:
-        for i in range(100000):
-            # put lock
-            lock.acquire()
-            change(n)
-    finally:
-        # release lock
-        lock.release()
+    # try:
+    #     for i in range(100000):
+    #         # put lock
+    #         lock.acquire()
+    #         change(n)
+    # finally:
+    #     # release lock
+    #     lock.release()
 
 
 
