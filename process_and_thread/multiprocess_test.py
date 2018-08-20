@@ -1,5 +1,7 @@
+import os
+import random
+import time
 from multiprocessing import Process, Queue
-import os, time, random
 
 
 # 写数据进程执行的代码:
@@ -16,11 +18,15 @@ def read(q):
     print('Process to read: %s' % os.getpid())
     while True:
         value = q.get(True)
-        print('Get %s from queue.' % value)
+        if value != None:
+            print('Get %s from queue.' % value)
+        else:
+            print("Jobs all done")
+            break
 
 
 if __name__=='__main__':
-    # 父进程创建Queue，并传给各个子进程：
+    # 父进程创建Queue，并传给各个子进程:
     q = Queue()
     pw = Process(target=write, args=(q,))
     pr = Process(target=read, args=(q,))
@@ -30,6 +36,8 @@ if __name__=='__main__':
     pr.start()
     # 等待pw结束:
     pw.join()
-    # pr进程里是死循环，无法等待其结束，只能强行终止:
-    pr.terminate()
+    # 放进None作为完成信号
+    q.put(None)
+    # 等待pr结束
+    pr.join()
 

@@ -24,6 +24,13 @@ when `acquire()` finds that it is zero, it blocks, waiting until some other thre
 - Note that `RLock` is actually a factory function which returns an instance of the most efficient version of the concrete
  `RLock` class that is supported by the platform.
 
+# Process
+- subprocess
+    - skip the threads
+- multiprocess
+    - get process id and get parent process id from os
+- consumer and producer
+    - using `queue` to connect different processes
 
 # Thread notice
 - When creating a thread, if the subclass overrides the constructor, it must make sure to invoke base class constructor
