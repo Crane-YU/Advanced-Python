@@ -72,3 +72,29 @@
     - 相对位置布局，随意改变窗口大小会导致混乱
     - 使用place函数，分为绝对布局和相对布局，绝对布局使用x，y参数
     - 相对布局使用relx, rely, relheight, relwidth
+    
+# 消息机制
+- 消息的传递机制
+    - 自动发出事件/消息
+    - 消息有系统负责发送到队列
+    - 由相关组件进行绑定/设置
+    - 后端自动选择感兴趣的事件并做出相应反应
+    
+- 消息格式：
+    - <[modifier-]---type-[-detail]>
+    - e.g <Button-1>: Button表示一个按钮事件，1代表的是鼠标左键，2代表中键
+    - e.g <KeyPress-A>: 按下A键
+    - e.g <Control-Shift-KeyPress-A>: 同时按下control, shift, A 三个按键
+    - [键位对应名称]
+    (https://infohost.nmt.edu/tcc/help/pubs/tkinter/web/key-names.html)
+    
+# 绑定
+- bind_all: 全局范围的绑定，默认的是全局快捷键，例如F1是帮助文档
+- bind_class: 接受三个参数，第一个是类名，第二个是事件，第三个是操作
+    - w.bind_class("Entry", "Control-V", my_paste)
+- bind: 单独对某一个实例绑定
+- unbind： 解绑，需要一个参数，即你要解绑哪个事件
+
+## Entry
+- 输入框，功能单一
+- entry["show"] = "*", 设置遮挡字符，输入密码时使用
