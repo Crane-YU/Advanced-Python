@@ -20,6 +20,7 @@
     
 - urlopen返回对象
     - 处理返回异常的状况
+    - urlopen里面不能使用data，功能受限制
 
 - request.data的使用
     - get:
@@ -36,3 +37,18 @@
             - 简而言之，一旦请求更改方法，其他请求头部信息也要改变
         - 　　urllib.parse.urlencode可以自动将字符串转化为上面的值
         - example3
+        
+    - 为了更多的设置请求信息，单纯的urlopen函数已经不能满足了，需要利用request.Request
+    
+- request.Request
+    - example4
+    - 可以在header里面加东西来隐藏身份
+    
+- urllib.error
+    - URL error 产生原因：
+        - no internet access
+        - 服务器失效，找不到指定服务器
+        - OS error的子类
+        - example7
+    - HTTP error (subset of urlerror):
+        - example8
