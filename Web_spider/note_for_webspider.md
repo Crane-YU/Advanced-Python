@@ -89,7 +89,86 @@
     - session的存放位置
         - 存放在服务器端
         - 一般情况，session放在数据库（默认）中或者内存里
+        - 没有cookie登录 example11
         
+    - 使用cookie登录
+        - http模块包含一些cookie的模块，我们可以自动使用cookie
+            - CookieJar
+                - 管理储存cookie，向传出的http请求添加cookie
+                - cookie存储在内存中
+            - FileCookieJar(filename, delayload=None, policy=None)
+                - 使用文件管理cookie
+                - cookie保存在文件里
+            - MozillaCookieJar(filename, delayload=None, policy=None)
+            - LwpCookieJar
+        - 利用CookieJar访问人人 example12
+    
+    - cookie的属性：
+        - name
+        - value
+        - domain：可以访问此cookie的域名
+        - path：可以访问此cookie的页面路径
+        - expires：过期时间
+        - size：大小
+        - Http字段
+        
+- SSL
+    - SSL证书是遵守SSL安全套阶层协议的服务器数字证书（SecureSocketLayer）
+
+- js加密
+    - 有的反爬虫策略采用js对需要传输的数据进行加密处理（通常取md5值）
+    - 经过加密，传输的就是密文，但是加密的函数或者过程一定是在浏览器完成的，也就是一定会把代码（js代码）暴露给使用者
+    - 通过阅读加密算法，就乐意模拟出加密过程，从而达到破解
+    - 过程参看example13
+    
+- ajax
+    - 异步请求
+    - 一定会有url，请求方法，可能有数据
+    - 一般使用json
+    - 案例，example14(豆瓣电影)
+    
+# Requests
+- HTTP for Humans
+- 继承了urllib所有的特征
+- 底层使用的是urllib3
+- 中文档案： http://docs.python-requests.org/zh_CN/latest/index.html
+- get请求
+    - requests.get()
+    - requests.request("get", url)
+    - 可以带有参数headers和params
+    - 案例, example15
+- get返回内容
+    - 案例, example16
+    
+- post
+    - requests.post(url = url, data = data)
+    - 参看案例, example17
+    
+- proxy
+        
+        proxies = {
+        "http": "address of proxy"
+        "https": "address of proxy"
+        }
+        
+        rsp = requests.request("get", "hrrp://xxxxxxx", proxies=proxies)
+        
+    - 代理可能报错，如果使用人数多，考虑到安全问题，可能会被强行关闭
+
+- 用户验证
+    - 代理验证
+    
+            #可能需要使用HTTP basic Auth， 可以这样
+            # 格式为  用户名:密码@代理地址：端口地址
+            proxy = { "http": "china:123456@192.168.1.123：4444"}
+            rsp = requests.get("http://baidu.com", proxies=proxy)
+- web端用户验证
+    - 如果遇到web客户端验证，需要添加auth=（用户名，密码）
+    
+            autu=("test1", "123456")#授权信息
+            rsp = requests.get("http://www.baidu.com", auth=auth)   
+
+ 
         
         
     
