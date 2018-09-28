@@ -168,7 +168,81 @@
             autu=("test1", "123456")#授权信息
             rsp = requests.get("http://www.baidu.com", auth=auth)   
 
- 
-        
-        
+- cookie
+    - requests可以自动处理cookie信息
     
+            rsp = requests.get("http://xxxxxx")
+            # 如果对方服务器传回来一个cookie信息，则可以通过反馈的cookie属性得到
+            # 返回一个cookiejar实例
+            cookiejar = rsp.cookies
+            
+            # 可以将cookiejar转化为字典格式
+            cookiedict = requests.utils.dict_from_cookiejar(cookiejar)
+ 
+- session
+    - 和服务器上的session不是一个概念
+    - 模拟一次对话，从客户端浏览器链接服务器开始，到客户端浏览器断开
+    - 能让我们跨请求时保持某些参数，比如在同一个session实例发出的 所有请求之间保持cookie
+    
+            # 创建session对象，可以保持cookie值
+            ss = requests.session()
+            headers = {"User-Agetn":"xxxxxxxxxxxxxxxxxx"}  
+            data = {"name":"xxxxxxxxxxx"}
+              
+            # 此时，由创建的session管理请求，负责发出请求，
+            ss.post("http://www.baidu.com", data=data, headers=headers)  
+            rsp = ss.get("xxxxxxxxxxxx")
+
+- https请求验证ssl证书
+    - 参数verify负责表示是否需要验证ssL证书，默认是True
+     -如果不需要验证ssl证书，则设置成False表示关闭
+
+            rsp = requests.get("https://www.baidu.com", verify=False)
+            # 如果用verify=True访问12306，会报错，因为他证书有问题 
+        
+# 页面解析和数据处理
+- 结构化数据：先有结构，再有数据
+    - JSON文件
+        - JSON Path
+        - 转换成Python类型进行操作（json类）
+    - XML文件
+        - 转换成python类型（xmltodict）
+        - XPath
+        - CSS选择器
+        - 正则
+- 非结构化数据：先有数据，再有结构
+    - 文本
+    - 电话号码
+    - 邮箱地址
+        - 通常处理此类数据，使用正则表达式
+    - Html文件
+    - 正则
+    - XPath
+    - CSS选择器
+      
+# CSS选择器 BeautifulSoup4
+- 几个常用提取信息工具的比较：
+    - 正则: 很快，不好用，不许安装
+    - beautifulsoup: 慢，使用简单，安装简单
+    - lxml: 比较快，使用简单，安装一般
+    - 案例18
+- 四大对象
+    - Tag
+    - NavigableString
+    - BeautifulSoup
+    - Comment
+- Tag
+    - 对应html中的标签
+    - 可以通过soup.tag_name
+    - tag两个重要属性
+        - name
+        - attrs
+    - 案例19
+- NavigableString
+    - 对应内容值
+- BeautifulSoup
+    - 表示的是一个文档的内容，大部分可以把他当做tag对象
+    - 一般我们可以用soup来表示
+- Comment  
+    - 特殊类型的NavigableString对象
+    - 对其输出，则内容不包括注释符号  
